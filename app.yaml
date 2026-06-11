@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: skillzverse
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/saihari1/GitOps.git
+    targetRevision: HEAD
+    path: k8s
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: skillzverse
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
