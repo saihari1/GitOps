@@ -6,7 +6,7 @@ metadata:
   namespace: skillzverse
 
 spec:
-  replicas: 2
+  replicas: 6
 
   selector:
     matchLabels:
