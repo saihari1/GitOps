@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+
+  name: skillzverse-ingress
+
+  namespace: skillzverse
+
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+
+spec:
+
+  ingressClassName: nginx
+
+  tls:
+
+  - hosts:
+    - poll.harinadh.xyz
+    - api.harinadh.xyz
+
+    secretName: skillzverse-tls
+
+  rules:
+
+  - host: poll.harinadh.xyz
+
+    http:
+
+      paths:
+
+      - path: /
+        pathType: Prefix
+
+        backend:
+
+          service:
+            name: frontend-service
+
+            port:
+              number: 80
+
+  - host: api.harinadh.xyz
+
+    http:
+
+      paths:
+
+      - path: /
+        pathType: Prefix
+
+        backend:
+
+          service:
+            name: backend-service
+
+            port:
+              number: 80
